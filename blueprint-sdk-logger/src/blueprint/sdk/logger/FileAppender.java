@@ -46,7 +46,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-import bluerpint.sdk.util.jvm.shutdown.Terminatable;
+import blueprint.sdk.util.jvm.shutdown.Terminatable;
 
 /**
  * Log appender for file

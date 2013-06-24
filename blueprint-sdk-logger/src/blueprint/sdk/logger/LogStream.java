@@ -49,7 +49,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Calendar;
 
-import bluerpint.sdk.util.StringUtil;
+import blueprint.sdk.util.StringUtil;
 
 /**
  * Extended PrintStream for logger.<br>
