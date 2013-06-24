@@ -355,7 +355,7 @@ public class Logger {
 				}
 			}
 		} catch (IndexOutOfBoundsException oe) {
-			warning(this, "No such error level - " + level);
+			warn(this, "No such error level - " + level);
 		}
 	}
 
@@ -471,7 +471,7 @@ public class Logger {
 		}
 	}
 
-	public void warning(final Object msg) {
+	public void warn(final Object msg) {
 		lock.lock();
 		try {
 			println(LogLevel.WAN, msg);
@@ -480,10 +480,10 @@ public class Logger {
 		}
 	}
 
-	public void warning(final Object caller, final Object msg) {
+	public void warn(final Object caller, final Object msg) {
 		lock.lock();
 		try {
-			warning(getCallerInfo(caller) + msg);
+			warn(getCallerInfo(caller) + msg);
 		} finally {
 			lock.unlock();
 		}
