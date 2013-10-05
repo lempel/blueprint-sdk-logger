@@ -54,7 +54,7 @@ import blueprint.sdk.util.Validator;
 /**
  * Logger
  * 
- * @author Simon Lee
+ * @author Sangmin Lee
  * @version $Revision$
  * @since 2000. 12. 04
  * @last $Date$

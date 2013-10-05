@@ -45,7 +45,7 @@ package blueprint.sdk.logger;
 /**
  * Log Levels
  * 
- * @author Simon Lee
+ * @author Sangmin Lee
  * @version $Revision$
  * @since 2001. 03. 08
  * @last $Date$

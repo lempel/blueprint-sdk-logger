@@ -47,7 +47,7 @@ import java.io.PrintStream;
 /**
  * Log appender for console
  * 
- * @author Simon Lee
+ * @author Sangmin Lee
  * @version $Revision$
  * @since 2008. 12. 04
  * @last $Date$

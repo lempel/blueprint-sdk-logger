@@ -55,7 +55,7 @@ import blueprint.sdk.util.StringUtil;
  * Extended PrintStream for logger.<br>
  * Prints timestamp always.<br>
  * 
- * @author Simon Lee
+ * @author Sangmin Lee
  * @version $Revision$
  * @since 2002. 07. 12
  * @last $Date$

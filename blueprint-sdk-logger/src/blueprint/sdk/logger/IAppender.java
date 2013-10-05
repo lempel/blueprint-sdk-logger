@@ -47,7 +47,7 @@ import java.io.PrintStream;
 /**
  * Common interface for log appenders
  * 
- * @author Simon Lee
+ * @author Sangmin Lee
  * @version $Revision$
  * @since 2012. 11. 20
  * @last $Date$
