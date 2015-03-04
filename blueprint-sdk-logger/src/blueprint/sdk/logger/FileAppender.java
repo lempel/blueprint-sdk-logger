@@ -14,7 +14,7 @@
  Background:
 
  blueprint-sdk is a java software development kit to protect other open source
- softwares' licenses. It's intended to provide light weight APIs for blueprints.
+ software licenses. It's intended to provide light weight APIs for blueprints.
  Well... at least trying to.
 
  There are so many great open source projects now. Back in year 2000, there
@@ -34,7 +34,7 @@
  license terms.
 
 
- To commiters:
+ To committers:
 
  License terms of the other software used by your source code should not be
  violated by using your source code. That's why blueprint-sdk is made for.
@@ -42,232 +42,238 @@
  */
 package blueprint.sdk.logger;
 
+import blueprint.sdk.util.Terminatable;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-import blueprint.sdk.util.Terminatable;
-
 /**
  * Log appender for file
- * 
+ *
  * @author Sangmin Lee
- * @version $Revision$
  * @since 2000. 12. 04
- * @last $Date$
  */
 public class FileAppender implements Terminatable, Runnable, IAppender {
-	/** System.out */
-	protected transient LogStream outStream = null;
-	/** System.err */
-	protected transient LogStream errStream = null;
+    /**
+     * System.out
+     */
+    private transient LogStream outStream = null;
+    /**
+     * System.err
+     */
+    private transient LogStream errStream = null;
 
-	protected String outFileName = "";
-	protected String errFileName = "";
+    private String outFileName = "";
+    private String errFileName = "";
 
-	private transient boolean runFlag = false;
-	private transient boolean terminated = false;
+    private transient boolean runFlag = false;
+    private transient boolean terminated = false;
 
-	/**
-	 * Constructor
-	 * 
-	 * @param outFileName
-	 * @throws FileNotFoundException
-	 */
-	public FileAppender(final String outFileName) throws FileNotFoundException {
-		this(outFileName, false);
-	}
+    /**
+     * Constructor
+     *
+     * @param outFileName filename for stdout
+     * @throws FileNotFoundException
+     */
+    @SuppressWarnings("UnusedDeclaration")
+    public FileAppender(final String outFileName) throws FileNotFoundException {
+        this(outFileName, false);
+    }
 
-	/**
-	 * Constructor
-	 * 
-	 * @param outFileName
-	 * @param append
-	 * @throws FileNotFoundException
-	 */
-	public FileAppender(final String outFileName, final boolean append) throws FileNotFoundException {
-		this(outFileName, append, false);
-	}
+    /**
+     * Constructor
+     *
+     * @param outFileName filename for stdout
+     * @param append      true: append, false: create new
+     * @throws FileNotFoundException
+     */
+    @SuppressWarnings({"WeakerAccess", "SameParameterValue"})
+    public FileAppender(final String outFileName, final boolean append) throws FileNotFoundException {
+        this(outFileName, append, false);
+    }
 
-	/**
-	 * Constructor
-	 * 
-	 * @param outFileName
-	 * @param append
-	 * @param replaceSystem
-	 *            set to replace System Streams (System.out, System.err)
-	 * @throws FileNotFoundException
-	 */
-	public FileAppender(final String outFileName, final boolean append, final boolean replaceSystem)
-			throws FileNotFoundException {
-		outStream = new LogStream(new FileOutputStream(outFileName, append), true);
-		errStream = outStream;
-		this.outFileName = outFileName;
+    /**
+     * Constructor
+     *
+     * @param outFileName   filename for stdout
+     * @param append        true: append, false: create new
+     * @param replaceSystem set to replace System Streams (System.out, System.err)
+     * @throws FileNotFoundException
+     */
+    public FileAppender(final String outFileName, final boolean append, final boolean replaceSystem)
+            throws FileNotFoundException {
+        outStream = new LogStream(new FileOutputStream(outFileName, append), true);
+        errStream = outStream;
+        this.outFileName = outFileName;
 
-		if (replaceSystem) {
-			System.setOut(outStream);
-			System.setErr(outStream);
-		}
-	}
+        if (replaceSystem) {
+            System.setOut(outStream);
+            System.setErr(outStream);
+        }
+    }
 
-	/**
-	 * Constructor
-	 * 
-	 * @param outFileName
-	 * @param errFileName
-	 * @throws FileNotFoundException
-	 */
-	public FileAppender(final String outFileName, final String errFileName) throws FileNotFoundException {
-		this(outFileName, errFileName, false, false);
-	}
+    /**
+     * Constructor
+     *
+     * @param outFileName filename for stdout
+     * @param errFileName filename for stderr
+     * @throws FileNotFoundException
+     */
+    @SuppressWarnings("UnusedDeclaration")
+    public FileAppender(final String outFileName, final String errFileName) throws FileNotFoundException {
+        this(outFileName, errFileName, false, false);
+    }
 
-	/**
-	 * Constructor
-	 * 
-	 * @param outFileName
-	 * @param errFileName
-	 * @param append
-	 * @throws FileNotFoundException
-	 */
-	public FileAppender(final String outFileName, final String errFileName, final boolean append)
-			throws FileNotFoundException {
-		this(outFileName, errFileName, append, false);
-	}
+    /**
+     * Constructor
+     *
+     * @param outFileName filename for stdout
+     * @param errFileName filename for stderr
+     * @param append      true: append, false: create new
+     * @throws FileNotFoundException
+     */
+    @SuppressWarnings("UnusedDeclaration")
+    public FileAppender(final String outFileName, final String errFileName, final boolean append)
+            throws FileNotFoundException {
+        this(outFileName, errFileName, append, false);
+    }
 
-	/**
-	 * Constructor
-	 * 
-	 * @param outFileName
-	 * @param errFileName
-	 * @param append
-	 * @param replaceSystem
-	 *            set to replace System Streams (System.out, System.err)
-	 * @throws FileNotFoundException
-	 */
-	public FileAppender(final String outFileName, final String errFileName, final boolean append,
-			final boolean replaceSystem) throws FileNotFoundException {
-		this(outFileName, append, replaceSystem);
+    /**
+     * Constructor
+     *
+     * @param outFileName   filename for stdout
+     * @param errFileName   filename for stderr
+     * @param append        true: append, false: create new
+     * @param replaceSystem set to replace System Streams (System.out, System.err)
+     * @throws FileNotFoundException
+     */
+    public FileAppender(final String outFileName, final String errFileName, final boolean append,
+                        final boolean replaceSystem) throws FileNotFoundException {
+        this(outFileName, append, replaceSystem);
 
-		errStream = new LogStream(new FileOutputStream(errFileName, append), true);
-		this.errFileName = errFileName;
+        errStream = new LogStream(new FileOutputStream(errFileName, append), true);
+        this.errFileName = errFileName;
 
-		if (replaceSystem) {
-			System.setErr(errStream);
-		}
-	}
+        if (replaceSystem) {
+            System.setErr(errStream);
+        }
+    }
 
-	public void start() {
-		Thread thr = new Thread(this);
-		thr.setDaemon(true);
-		thr.start();
-	}
+    public void start() {
+        Thread thr = new Thread(this);
+        thr.setDaemon(true);
+        thr.start();
+    }
 
-	public boolean isValid() {
-		return runFlag;
-	}
+    public boolean isValid() {
+        return runFlag;
+    }
 
-	public boolean isTerminated() {
-		return terminated;
-	}
+    public boolean isTerminated() {
+        return terminated;
+    }
 
-	public void terminate() {
-		runFlag = false;
-	}
+    public void terminate() {
+        runFlag = false;
+    }
 
-	public void run() {
-		runFlag = true;
+    public void run() {
+        runFlag = true;
 
-		while (runFlag) {
-			if (outFileName != null && !outFileName.isEmpty()) {
-				File outFile = new File(outFileName);
+        while (runFlag) {
+            if (outFileName != null && !outFileName.isEmpty()) {
+                File outFile = new File(outFileName);
 
-				if (!outFile.exists()) {
-					try {
-						LogStream oldStream = outStream;
+                if (!outFile.exists()) {
+                    try {
+                        LogStream oldStream = outStream;
 
-						outStream = new LogStream(outFileName);
+                        outStream = new LogStream(outFileName);
 
-						// close when new stream is created
-						oldStream.close();
-					} catch (FileNotFoundException e) {
-						System.out.println("Can't create log file"); // NOPMD
-					}
-				}
-			}
+                        // close when new stream is created
+                        oldStream.close();
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Can't create log file");
+                    }
+                }
+            }
 
-			if (errFileName != null && !errFileName.isEmpty() && !outFileName.equals(errFileName)) {
-				File errFile = new File(errFileName);
+            if (errFileName != null && !errFileName.isEmpty() && outFileName != null && !outFileName.equals(errFileName)) {
+                File errFile = new File(errFileName);
 
-				if (!errFile.exists()) {
-					try {
-						LogStream oldStream = errStream;
+                if (!errFile.exists()) {
+                    try {
+                        LogStream oldStream = errStream;
 
-						errStream = new LogStream(errFileName);
+                        errStream = new LogStream(errFileName);
 
-						// close when new stream is created
-						oldStream.close();
-					} catch (FileNotFoundException e) {
-						System.out.println("Can't create log file"); // NOPMD
-					}
-				}
-			}
+                        // close when new stream is created
+                        oldStream.close();
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Can't create log file");
+                    }
+                }
+            }
 
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException ignored) {
-			}
-		}
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ignored) {
+            }
+        }
 
-		terminated = true;
-	}
+        terminated = true;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see lempel.blueprint.base.log.IAppender#getOutStream()
-	 */
-	public LogStream getOutStream() {
-		return outStream;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see lempel.blueprint.base.log.IAppender#getOutStream()
+     */
+    public LogStream getOutStream() {
+        return outStream;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see lempel.blueprint.base.log.IAppender#getErrStream()
-	 */
-	public LogStream getErrStream() {
-		return errStream;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see lempel.blueprint.base.log.IAppender#getErrStream()
+     */
+    public LogStream getErrStream() {
+        return errStream;
+    }
 
-	/**
-	 * @return outFileName �� ��
-	 */
-	public String getOutFileName() {
-		return outFileName;
-	}
+    /**
+     * @return outFileName �� ��
+     */
+    @SuppressWarnings("UnusedDeclaration")
+    public String getOutFileName() {
+        return outFileName;
+    }
 
-	/**
-	 * @return errFileName �� ��
-	 */
-	public String getErrFileName() {
-		return errFileName;
-	}
+    /**
+     * @return errFileName �� ��
+     */
+    @SuppressWarnings("UnusedDeclaration")
+    public String getErrFileName() {
+        return errFileName;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see lempel.blueprint.base.log.IAppender#close()
-	 */
-	public void close() {
-		terminate();
+    /*
+     * (non-Javadoc)
+     *
+     * @see lempel.blueprint.base.log.IAppender#close()
+     */
+    public void close() {
+        terminate();
 
-		if (errStream != null) {
-			errStream.close();
-			errStream = null;
-		}
-		if (outStream != null) {
-			outStream.close();
-			outStream = null;
-		}
-	}
+        if (errStream != null) {
+            errStream.close();
+            errStream = null;
+        }
+        if (outStream != null) {
+            outStream.close();
+            outStream = null;
+        }
+    }
 }

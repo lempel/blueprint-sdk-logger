@@ -14,7 +14,7 @@
  Background:
 
  blueprint-sdk is a java software development kit to protect other open source
- softwares' licenses. It's intended to provide light weight APIs for blueprints.
+ software licenses. It's intended to provide light weight APIs for blueprints.
  Well... at least trying to.
 
  There are so many great open source projects now. Back in year 2000, there
@@ -34,7 +34,7 @@
  license terms.
 
 
- To commiters:
+ To committers:
 
  License terms of the other software used by your source code should not be
  violated by using your source code. That's why blueprint-sdk is made for.
@@ -44,42 +44,40 @@ package blueprint.sdk.logger;
 
 /**
  * Log Demo
- * 
+ *
  * @author Sangmin Lee
- * @version $Revision$
  * @since 2004. 04. 14
- * @last $Date$
  */
 public class Demo {
-	/**
-	 * Entry Point
-	 * 
-	 * @param args
-	 */
-	public static void main(final String[] args) {
-		String userDir = System.getProperty("user.dir");
-		System.out.println("System.out is redirected '" + userDir + "\\out.log' file and System.err is to '" + userDir
-				+ "\\err.log'");
+    /**
+     * Entry Point
+     *
+     * @param args arguments
+     */
+    public static void main(final String[] args) {
+        String userDir = System.getProperty("user.dir");
+        System.out.println("System.out is redirected '" + userDir + "\\out.log' file and System.err is to '" + userDir
+                + "\\err.log'");
 
-		Logger logger = Logger.toFile("out.log", "err.log", true, true);
+        Logger logger = Logger.toFile("out.log", "err.log", true, true);
 
-		logger.setLogLevel("11111");
-		logger.setTraceFlag(true);
+        logger.setLogLevel("11111");
+        logger.setTraceFlag(true);
 
-		logger.println(LogLevel.ERR, "This is a error level message. It prints always.");
-		System.out.println("Using System.out.println");
-		logger.println(LogLevel.SYS, "This is a system level message.");
-		logger.println(LogLevel.WAN, "This is a warning level message.");
-		logger.println(LogLevel.INF, "This is a informaion level message.");
-		logger.println(LogLevel.DBG, "This is a debug level message.");
-		logger.println(LogLevel.SQL, "This is a sql level message.");
+        logger.println(LogLevel.ERR, "This is a error level message. It prints always.");
+        System.out.println("Using System.out.println");
+        logger.println(LogLevel.SYS, "This is a system level message.");
+        logger.println(LogLevel.WAN, "This is a warning level message.");
+        logger.println(LogLevel.INF, "This is a information level message.");
+        logger.println(LogLevel.DBG, "This is a debug level message.");
+        logger.println(LogLevel.SQL, "This is a sql level message.");
 
-		try {
-			throw new IllegalArgumentException("StackTrace example");
-		} catch (RuntimeException ex) {
-			ex.printStackTrace();
-		}
+        try {
+            throw new IllegalArgumentException("StackTrace example");
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+        }
 
-		logger.hexDump("ABCDEFGHIJKLMNOPQRSTUVWXYZ".getBytes());
-	}
+        logger.hexDump("ABCDEFGHIJKLMNOPQRSTUVWXYZ".getBytes());
+    }
 }

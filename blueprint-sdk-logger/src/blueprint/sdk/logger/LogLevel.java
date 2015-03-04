@@ -14,7 +14,7 @@
  Background:
 
  blueprint-sdk is a java software development kit to protect other open source
- softwares' licenses. It's intended to provide light weight APIs for blueprints.
+ software licenses. It's intended to provide light weight APIs for blueprints.
  Well... at least trying to.
 
  There are so many great open source projects now. Back in year 2000, there
@@ -34,7 +34,7 @@
  license terms.
 
 
- To commiters:
+ To committers:
 
  License terms of the other software used by your source code should not be
  violated by using your source code. That's why blueprint-sdk is made for.
@@ -44,31 +44,43 @@ package blueprint.sdk.logger;
 
 /**
  * Log Levels
- * 
+ *
  * @author Sangmin Lee
- * @version $Revision$
  * @since 2001. 03. 08
- * @last $Date$
  */
 public class LogLevel {
-	/** Error Information */
-	public static final int ERR = -1;
+    /**
+     * Error Information
+     */
+    public static final int ERR = -1;
 
-	/** System Information */
-	public static final int SYS = 0;
+    /**
+     * System Information
+     */
+    public static final int SYS = 0;
 
-	/** Waring Information */
-	public static final int WAN = 1;
+    /**
+     * Waring Information
+     */
+    public static final int WAN = 1;
 
-	/** General Information */
-	public static final int INF = 2;
+    /**
+     * General Information
+     */
+    public static final int INF = 2;
 
-	/** Debug Information */
-	public static final int DBG = 3;
+    /**
+     * Debug Information
+     */
+    public static final int DBG = 3;
 
-	/** SQL Information */
-	public static final int SQL = 4;
+    /**
+     * SQL Information
+     */
+    public static final int SQL = 4;
 
-	/** Symbols of each level */
-	public static final String[] strLevel = { "[ERR] ", "[SYS] ", "[WAN] ", "[INF] ", "[DBG] ", "[SQL] " };
+    /**
+     * Symbols of each level
+     */
+    public static final String[] strLevel = {"[ERR] ", "[SYS] ", "[WAN] ", "[INF] ", "[DBG] ", "[SQL] "};
 }

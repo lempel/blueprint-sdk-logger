@@ -14,7 +14,7 @@
  Background:
 
  blueprint-sdk is a java software development kit to protect other open source
- softwares' licenses. It's intended to provide light weight APIs for blueprints.
+ software licenses. It's intended to provide light weight APIs for blueprints.
  Well... at least trying to.
 
  There are so many great open source projects now. Back in year 2000, there
@@ -34,7 +34,7 @@
  license terms.
 
 
- To commiters:
+ To committers:
 
  License terms of the other software used by your source code should not be
  violated by using your source code. That's why blueprint-sdk is made for.
@@ -46,25 +46,24 @@ import java.io.PrintStream;
 
 /**
  * Common interface for log appenders
- * 
+ *
  * @author Sangmin Lee
- * @version $Revision$
  * @since 2012. 11. 20
- * @last $Date$
  */
+@SuppressWarnings("WeakerAccess")
 public interface IAppender {
-	/**
-	 * @return standard output stream
-	 */
-	PrintStream getOutStream();
+    /**
+     * @return standard output stream
+     */
+    PrintStream getOutStream();
 
-	/**
-	 * @return standard error stream
-	 */
-	PrintStream getErrStream();
+    /**
+     * @return standard error stream
+     */
+    PrintStream getErrStream();
 
-	/**
-	 * Close all streams
-	 */
-	void close();
+    /**
+     * Close all streams
+     */
+    void close();
 }

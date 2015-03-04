@@ -14,7 +14,7 @@
  Background:
 
  blueprint-sdk is a java software development kit to protect other open source
- softwares' licenses. It's intended to provide light weight APIs for blueprints.
+ software licenses. It's intended to provide light weight APIs for blueprints.
  Well... at least trying to.
 
  There are so many great open source projects now. Back in year 2000, there
@@ -34,7 +34,7 @@
  license terms.
 
 
- To commiters:
+ To committers:
 
  License terms of the other software used by your source code should not be
  violated by using your source code. That's why blueprint-sdk is made for.
@@ -46,72 +46,75 @@ import java.io.PrintStream;
 
 /**
  * Log appender for console
- * 
+ *
  * @author Sangmin Lee
- * @version $Revision$
  * @since 2008. 12. 04
- * @last $Date$
  */
 public class ConsoleAppender implements IAppender {
-	/** system appender (original System.out/err) */
-	protected static final SystemAppender sysAppender;
+    /**
+     * system appender (original System.out/err)
+     */
+    private static final SystemAppender sysAppender;
 
-	/** System.out */
-	protected transient LogStream outStream = null;
-	/** System.err */
-	protected transient LogStream errStream = null;
+    /**
+     * System.out
+     */
+    private transient LogStream outStream = null;
+    /**
+     * System.err
+     */
+    private transient LogStream errStream = null;
 
-	static {
-		sysAppender = new SystemAppender();
-	}
+    static {
+        sysAppender = new SystemAppender();
+    }
 
-	/**
-	 * Constructor
-	 * 
-	 * @param replaceSystem
-	 *            set to replace System Streams (System.out, System.err)
-	 */
-	public ConsoleAppender(final boolean replaceSystem) {
-		outStream = new LogStream(sysAppender.getOutStream(), true);
-		errStream = new LogStream(sysAppender.getErrStream(), true);
+    /**
+     * Constructor
+     *
+     * @param replaceSystem set to replace System Streams (System.out, System.err)
+     */
+    public ConsoleAppender(final boolean replaceSystem) {
+        outStream = new LogStream(sysAppender.getOutStream(), true);
+        errStream = new LogStream(sysAppender.getErrStream(), true);
 
-		if (replaceSystem) {
-			System.setOut(outStream);
-			System.setErr(outStream);
-		}
-	}
+        if (replaceSystem) {
+            System.setOut(outStream);
+            System.setErr(outStream);
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see lempel.blueprint.base.log.IAppender#getOutStream()
-	 */
-	public PrintStream getOutStream() {
-		return outStream;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see lempel.blueprint.base.log.IAppender#getOutStream()
+     */
+    public PrintStream getOutStream() {
+        return outStream;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see lempel.blueprint.base.log.IAppender#getErrStream()
-	 */
-	public PrintStream getErrStream() {
-		return errStream;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see lempel.blueprint.base.log.IAppender#getErrStream()
+     */
+    public PrintStream getErrStream() {
+        return errStream;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see lempel.blueprint.base.log.IAppender#close()
-	 */
-	public void close() {
-		if (errStream != null) {
-			errStream.close();
-			errStream = null;
-		}
-		if (outStream != null) {
-			outStream.close();
-			outStream = null;
-		}
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see lempel.blueprint.base.log.IAppender#close()
+     */
+    public void close() {
+        if (errStream != null) {
+            errStream.close();
+            errStream = null;
+        }
+        if (outStream != null) {
+            outStream.close();
+            outStream = null;
+        }
+    }
 }
